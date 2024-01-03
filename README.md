@@ -1,2 +1,2 @@
-# Nannuq
+# Nanuq
 ERP for event organizators
