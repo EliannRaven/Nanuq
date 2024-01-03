@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import timedelta
 
 # Create your models here.
 
@@ -34,6 +35,42 @@ class TresoreryCompta(models.Model):
 
     def __str__(self):
         return self.moneyFlowName
+    
+class Room(models.Model):
+    location = models.CharField(max_length = 20)
+    comment = models.TextField(blank = True, null = True)
+    table = models.PositiveIntegerField(blank = True, null = True)
+    chair = models.PositiveIntegerField(blank = True, null = True)
+    panel = models.PositiveIntegerField(blank = True, null = True)
+    panelType = models.CharField(max_length = 50, blank = True, null = True)
+    #conformation = models.ImageField()
+    water = models.BooleanField(blank = True, null = True)
+    elec = models.FloatField(default = 500)
+    elecComment = models.TextField(blank = True, null = True)
+    secuCheck = models.BooleanField(blank = True, null = True)
+
+    def __str__(self):
+        return self.location
+
+class Planning(models.Model):
+    location = models.ForeignKey(Room, on_delete = models.SET_NULL, null = True, blank = True)
+    #activity = models.ForeignKey(AnimationActivity, on_delete = models.SET_NULL, null = True, blank = True)
+    comment = models.TextField(blank = True, null = True)
+    day = models.DateField()
+    start = models.DateTimeField()
+    duration = models.PositiveIntegerField() #always in minutes
+    end = models.DateTimeField(blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+    # Calculate end time based on start and duration
+        if self.start and self.duration:
+            self.end = self.start + timedelta(minutes=self.duration)
+
+        # Call the original save method to save the instance
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"location: {self.location} - start: {self.start}"
 
 #Master class
 
@@ -65,5 +102,58 @@ class AnimationContact(models.Model):
     def __str__(self):
         return self.namEntity
 
+class AnimationStand(models.Model):
+    contact = models.ForeignKey(AnimationContact, on_delete = models.CASCADE)
+    name = models.CharField(max_length = 100)
+    comment= models.TextField()
+    category = models.CharField(max_length = 100, blank = True, null = True)
+    standMoney = models.ForeignKey(TresoreryCompta, on_delete = models.SET_NULL, null = True, blank = True)
+    location = models.CharField(max_length = 20, blank = True, null = True)
+    table = models.PositiveIntegerField(blank = True, null = True)
+    chair = models.PositiveIntegerField(blank = True, null = True)
+    panel = models.PositiveIntegerField(blank = True, null = True)
+    panelType = models.CharField(max_length = 50, blank = True, null = True)
+    vaisselle = models.TextField()
+    water = models.BooleanField(blank = True, null = True)
+    elec = models.FloatField(default = 500)
+    elecComment = models.TextField(blank = True, null = True)
+    secuCheck = models.BooleanField(blank = True, null = True)
+    deliveryTiming = models.DateTimeField()  
+    descriptionComm = models.TextField()
+    #imageComm = models.ImageField()
 
+    def __str__(self):
+        return self.name
+    
+class AnimationActivity(models.Model):
+    contact = models.ForeignKey(AnimationContact, on_delete = models.CASCADE)
+    name = models.CharField(max_length = 100)
+    activityMoney = models.ForeignKey(TresoreryCompta, on_delete = models.SET_NULL, null = True, blank = True)
+    comment= models.TextField()
+    category = models.CharField(max_length = 100, blank = True, null = True)
+    descriptionComm = models.TextField()
+    #imageComm = models.ImageField()
+    arrivalTiming = models.DateTimeField()
+    staffNeeded = models.PositiveIntegerField()
+    staffPreRequis = models.TextField()
+    staffActivityDescription = models.TextField()
 
+    def __str__(self):
+        return self.name
+
+class AnimationPrestation(models.Model):
+    contact = models.ForeignKey(AnimationContact, on_delete = models.CASCADE)
+    name = models.CharField(max_length = 100)
+    prestationMoney = models.ForeignKey(TresoreryCompta, on_delete = models.SET_NULL, null = True, blank = True)
+    comment= models.TextField()
+    category = models.CharField(max_length = 100, blank = True, null = True)
+    descriptionComm = models.TextField()
+    #imageComm = models.ImageField()
+    staffNeeded = models.PositiveIntegerField()
+    staffPreRequis = models.TextField()
+    staffActivityDescription = models.TextField()
+    technicalSheet = models.TextField()
+    satCheck = models.BooleanField()
+
+    def __str__(self):
+        return self.name
