@@ -27,7 +27,7 @@ class TresoreryCompta(models.Model):
     moneyFlowName = models.CharField(max_length = 200)
     models.CharField(max_length = 100, blank = True, null = True)
     amount = models.FloatField()
-    currency = models.CharField(max_length = 10, blank = True, null = True)
+    currency = models.CharField(max_length = 10, default = 'CHF', blank = True, null = True)
     category = models.CharField(max_length = 100, blank = True, null = True)
     subCategory = models.CharField(max_length = 100, blank = True, null = True)
     pole = models.CharField(max_length = 100, blank = True, null = True)
@@ -36,6 +36,20 @@ class TresoreryCompta(models.Model):
     def __str__(self):
         return self.moneyFlowName
     
+class TresoreryBudget(models.Model):
+    moneyLoad = models.CharField(max_length = 200)
+    description = models.TextField()
+    amount = models.PositiveIntegerField()
+    spent = models.PositiveIntegerField()
+    currency = models.CharField(max_length = 10, default = 'CHF', blank = True, null = True)
+    category = models.CharField(max_length = 100, blank = True, null = True)
+    subCategory = models.CharField(max_length = 100, blank = True, null = True)
+    pole = models.CharField(max_length = 100, blank = True, null = True)
+    comment = models.CharField(max_length = 100, blank = True, null = True)
+
+    def __str__(self):
+        return self.moneyLoad   
+
 class Room(models.Model):
     location = models.CharField(max_length = 20)
     comment = models.TextField(blank = True, null = True)
@@ -71,6 +85,22 @@ class Planning(models.Model):
 
     def __str__(self):
         return f"location: {self.location} - start: {self.start}"
+    
+class LogInventaire(models.Model):
+    materialName = models.CharField(max_length = 200, blank = True, null = True)
+    comment = models.TextField(blank = True, null = True)
+    category = models.CharField(max_length = 100, blank = True, null = True)
+    status = models.CharField(max_length = 100, blank = True, null = True)
+    acquisitionWay = models.CharField(max_length = 100, blank = True, null = True)
+    amount = models.PositiveIntegerField(blank = True, null = True)
+    unit = models.CharField(max_length = 20, blank = True, null = True)
+    storageLocation = models.CharField(max_length = 100, blank = True, null = True)
+    #jiUsedFor = models.ForeignKey()
+    elec = models.FloatField(default = 500)
+    elecComment = models.TextField(blank = True, null = True) 
+
+    def __str__(self):
+        return self.materialName
 
 #Master class
 
