@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>{% block title %}Nanuq: Event Intranet{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{% static 'image/nanuq.jpg' %}">
+    <!-- Add your CSS stylesheets and other head elements here -->
+</head>
+<body>
+
+    <header>
+        <!-- Add your header content here -->
+        <h1>Your Website</h1>
+        <!--{% block navbar %}
+        <!-- This is where the content of each page will go
+        {% endblock %}-->
+    </header>
+
+    <main>
+        {% block content %}
+            <!-- This is where the content of each page will go -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <!-- Add your footer content here -->
+        <p>&copy; 2024 Your Website. All rights reserved.</p>
+    </footer>
+
+    <!-- Add your JavaScript scripts and other footer elements here -->
+
+</body>
+</html>

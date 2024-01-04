@@ -14,5 +14,7 @@ admin.site.register(AnimationStand)
 admin.site.register(AnimationActivity)
 admin.site.register(AnimationPrestation)
 
-
+#C:\Users\nicoh\Documents\Computer_science\Portfolio\Nanuq\Nanuq\Suivi\templates\Suivi\intraHome.html
+#C:\Users\nicoh\Documents\Computer_science\Portfolio\Nanuq\Nanuq\Suivi\templates\Suivi
+#C:\Users\nicoh\Documents\Computer_science\Portfolio\Nanuq\Nanuq\Suivi\templates\intraBase.html
 
