@@ -1,0 +1,21 @@
+<table>
+    <tr>
+        <th>Comité en charge</th>
+        <th>Status</th>
+        <th>Contacte</th>
+        <th>Stand</th>
+        <th>Activité</th>
+        <th>Prestation</th>
+    </tr>
+    {% for contact in Contacts%}
+        <tr>
+            <td>{{contact.userInCharge.name}}</td>
+            <td>{{contact.status}}</td>
+            <td>{{contact.namEntity}}</td>
+            <td>{{contact.stand}}</td>
+            <td>{{contact.activity}}</td>
+            <td>{{contact.prestation}}</td>
+        </tr>
+        {% empty %}
+            <h3>Pas de contact enregistré</h3>
+    {% endfor %}
