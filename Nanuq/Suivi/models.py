@@ -36,7 +36,15 @@ CONTACT_STATUS = [
     ('WAITING_CONTRACT', 'Contrat envoyé'),
     ('CONTRACT_SIGNED', 'Contrat signé'),
     ('CONTRACT_CANCELLED', 'Contrat annulé'),
-    ('CANCELLED', 'Contact annul'),
+    ('CANCELLED', 'Contact annulé'),
+]
+
+CONTACT_LOG_STATUS = [
+    ('NOT_STARTED', 'Pas commencé'),
+    ('WAITING_CONTACT', 'En attente du contact'),
+    ('WAITING_COMMITTEE', 'En attente de nous'),
+    ('OK', 'Affaire conclue'),
+    ('CANCELLED', 'Annulé'),
 ]
 
 
@@ -74,9 +82,9 @@ class TresoreryCompta(models.Model):
     
 class TresoreryBudget(models.Model):
     moneyLoad = models.CharField(max_length = 200)
-    description = models.TextField()
-    amount = models.PositiveIntegerField()
-    spent = models.PositiveIntegerField()
+    description = models.TextField(blank = True, null = True)
+    amount = models.PositiveIntegerField(blank = True, null = True)
+    spent = models.PositiveIntegerField(blank = True, null = True)
     currency = models.CharField(max_length = 10, choices = CURRENCY, default = 'CHF', blank = True, null = True)
     category = models.CharField(max_length = 100, blank = True, null = True) #LIST
     subCategory = models.CharField(max_length = 100, blank = True, null = True) #LIST
@@ -93,7 +101,7 @@ class Room(models.Model):
     chair = models.PositiveIntegerField(blank = True, null = True)
     panel = models.PositiveIntegerField(blank = True, null = True)
     panelType = models.CharField(max_length = 50, choices = PANEL_TYPE, blank = True, null = True)
-    conformation = models.ImageField(upload_to='images/')
+    conformation = models.ImageField(upload_to='images/', blank = True, null = True)
     water = models.BooleanField(blank = True, null = True)
     elec = models.FloatField(default = 500)
     elecComment = models.TextField(blank = True, null = True)
@@ -160,9 +168,9 @@ class AnimationContact(models.Model):
     allergy = models.ManyToManyField(Allergy, blank = True)
     parking = models.ManyToManyField(Parking, blank = True)
     transportComment = models.TextField(blank = True, null = True)
-    transportStatus = models.CharField(max_length = 100, blank = True, null = True)
+    transportStatus = models.CharField(max_length = 100, choices = CONTACT_LOG_STATUS, default = 'NOT_STARTED', blank = True, null = True)
     hotelComment = models.TextField(blank = True, null = True)
-    hotelStatus = models.CharField(max_length = 100, blank = True, null = True)
+    hotelStatus = models.CharField(max_length = 100, choices = CONTACT_LOG_STATUS, default = 'NOT_STARTED', blank = True, null = True)
     expense = models.ManyToManyField(TresoreryCompta, blank = True) 
 
     def __str__(self):
@@ -171,22 +179,22 @@ class AnimationContact(models.Model):
 class AnimationStand(models.Model):
     contact = models.ForeignKey(AnimationContact, on_delete = models.CASCADE)
     name = models.CharField(max_length = 100)
-    comment= models.TextField()
-    category = models.CharField(max_length = 100, blank = True, null = True)
+    comment= models.TextField(blank = True, null = True)
+    category = models.CharField(max_length = 100, blank = True, null = True) #LIST
     standMoney = models.ForeignKey(TresoreryCompta, on_delete = models.SET_NULL, null = True, blank = True)
     location = models.CharField(max_length = 20, blank = True, null = True)
     table = models.PositiveIntegerField(blank = True, null = True)
     chair = models.PositiveIntegerField(blank = True, null = True)
     panel = models.PositiveIntegerField(blank = True, null = True)
-    panelType = models.CharField(max_length = 50, blank = True, null = True)
-    vaisselle = models.TextField()
+    panelType = models.CharField(max_length = 50, choices = PANEL_TYPE, blank = True, null = True)
+    vaisselle = models.TextField(blank = True, null = True)
     water = models.BooleanField(blank = True, null = True)
-    elec = models.FloatField(default = 500)
+    elec = models.FloatField(default = 500, blank = True, null = True)
     elecComment = models.TextField(blank = True, null = True)
     secuCheck = models.BooleanField(blank = True, null = True)
-    deliveryTiming = models.DateTimeField()  
-    descriptionComm = models.TextField()
-    #imageComm = models.ImageField()
+    deliveryTiming = models.DateTimeField(blank = True, null = True)  
+    descriptionComm = models.TextField(blank = True, null = True)
+    imageComm = models.ImageField(upload_to='images/', blank = True, null = True)
 
     def __str__(self):
         return self.name
@@ -195,14 +203,14 @@ class AnimationActivity(models.Model):
     contact = models.ForeignKey(AnimationContact, on_delete = models.CASCADE)
     name = models.CharField(max_length = 100)
     activityMoney = models.ForeignKey(TresoreryCompta, on_delete = models.SET_NULL, null = True, blank = True)
-    comment= models.TextField()
-    category = models.CharField(max_length = 100, blank = True, null = True)
-    descriptionComm = models.TextField()
-    #imageComm = models.ImageField()
-    arrivalTiming = models.DateTimeField()
-    staffNeeded = models.PositiveIntegerField()
-    staffPreRequis = models.TextField()
-    staffActivityDescription = models.TextField()
+    comment= models.TextField(blank = True, null = True)
+    category = models.CharField(max_length = 100, blank = True, null = True) #LIST
+    descriptionComm = models.TextField(blank = True, null = True)
+    imageComm = models.ImageField(upload_to='images/', blank = True, null = True)
+    arrivalTiming = models.DateTimeField(blank = True, null = True)
+    staffNeeded = models.PositiveIntegerField(blank = True, null = True)
+    staffPreRequis = models.TextField(blank = True, null = True)
+    staffActivityDescription = models.TextField(blank = True, null = True)
 
     def __str__(self):
         return self.name
@@ -211,15 +219,15 @@ class AnimationPrestation(models.Model):
     contact = models.ForeignKey(AnimationContact, on_delete = models.CASCADE)
     name = models.CharField(max_length = 100)
     prestationMoney = models.ForeignKey(TresoreryCompta, on_delete = models.SET_NULL, null = True, blank = True)
-    comment= models.TextField()
-    category = models.CharField(max_length = 100, blank = True, null = True)
-    descriptionComm = models.TextField()
-    #imageComm = models.ImageField()
-    staffNeeded = models.PositiveIntegerField()
-    staffPreRequis = models.TextField()
-    staffActivityDescription = models.TextField()
-    technicalSheet = models.TextField()
-    satCheck = models.BooleanField()
+    comment= models.TextField(blank = True, null = True)
+    category = models.CharField(max_length = 100, blank = True, null = True) #LIST
+    descriptionComm = models.TextField(blank = True, null = True)
+    imageComm = models.ImageField(upload_to='images/', blank = True, null = True)
+    staffNeeded = models.PositiveIntegerField(blank = True, null = True)
+    staffPreRequis = models.TextField(blank = True, null = True)
+    staffActivityDescription = models.TextField(blank = True, null = True)
+    technicalSheet = models.TextField(blank = True, null = True)
+    satCheck = models.BooleanField(blank = True, null = True)
 
     def __str__(self):
         return self.name
