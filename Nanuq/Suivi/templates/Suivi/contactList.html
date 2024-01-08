@@ -1,5 +1,19 @@
-<table>
-    <tr>
+{% extends 'intraBase.html' %}
+{% load static %}
+
+{% block header %}
+    <div class ="headerElement headerTitle">
+        Intranet Japan Impact:<br>
+        Suivi Pro
+    </div>
+{% endblock %}
+
+{% block content %}
+
+<div class ="createContactButton"><a href="#contact">Créer un contact</a></div>
+
+<table class = "suiviPro">
+    <tr class = "header">
         <th>Comité en charge</th>
         <th>Status</th>
         <th>Contacte</th>
@@ -8,9 +22,9 @@
         <th>Prestation</th>
     </tr>
     {% for contact in Contacts%}
-        <tr>
-            <td>{{contact.userInCharge.name}}</td>
-            <td>{{contact.status}}</td>
+        <tr class = "lines">
+            <td>{{contact.userInCharge.username}}</td>
+            <td>{{contact.get_status_display}}</td> <!--get_variableName_display-->
             <td>{{contact.namEntity}}</td>
             <td>{{contact.stand}}</td>
             <td>{{contact.activity}}</td>
@@ -19,3 +33,5 @@
         {% empty %}
             <h3>Pas de contact enregistré</h3>
     {% endfor %}
+
+    {% endblock %}

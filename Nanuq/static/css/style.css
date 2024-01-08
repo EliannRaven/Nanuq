@@ -7,7 +7,7 @@ body {
     background-color : rgb(237, 237, 237);
 }
 
-/* Header Navbar */
+/* Header intranet */
 .intraHeader {
     display: flex;
     align-items: center;
@@ -59,4 +59,38 @@ body {
 .intraNavbar a:hover {
     background-color: #ddd;
     color: black;
+}
+
+/*Contac list intranet */
+.suiviPro {
+    position: relative;
+    top: 50px;
+    width: 90%;
+    margin: 0 auto;
+    padding: 0 5%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+.suiviPro th, td {
+    text-align: center;
+    border: 2px solid #020339;
+}
+.suiviPro .header {
+    background-color: #BABBFF;
+    font-weight: 1000;
+}
+.createContactButton a {
+    position: relative;
+    top: 35px;
+    text-decoration: none;
+    margin-left: 5%;
+    padding: 10px;
+    text-align: center;
+    border: 2px solid #003E45;
+    background-color: #E2FCFF;
+    box-shadow: 1px 1px;
+    border-radius: 10px;
+}
+.createContactButton a:hover {
+    background-color: #ABEBC6 ;
 }
