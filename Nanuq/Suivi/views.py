@@ -20,44 +20,44 @@ class ContactCreate(CreateView):
     model = AnimationContact
     context_object_name = 'Contact'
     fields = '__all__'
-    template_name = 'Suivi/contactCreate.html'
-    #success_url = reverse_lazy('') => update view
+    template_name = 'Suivi/contactForm.html'
+    success_url = reverse_lazy('contactList')
 class StandCreate(CreateView):
     model = AnimationStand
     context_object_name = 'Stand'
     fields = '__all__'
-    template_name = 'Suivi/standCreate.html'
+    template_name = 'Suivi/standForm.html'
     #success_url = reverse_lazy('') => update view
 class ActivityCreate(CreateView):
     model = AnimationActivity
     context_object_name = 'Activity'
     fields = '__all__'
-    template_name = 'Suivi/activityCreate.html'
+    template_name = 'Suivi/activityForm.html'
     #success_url = reverse_lazy('') => update view
 class PrestaCreate(CreateView):
     model = AnimationPrestation
     context_object_name = 'Presta'
     fields = '__all__'
-    template_name = 'Suivi/prestaCreate.html'
+    template_name = 'Suivi/prestaForm.html'
     #success_url = reverse_lazy('') => update view
 
 #Update class view
 class ContactUpdate(UpdateView):
     model = AnimationContact
     fields = '__all__'
-    template_name = 'Suivi/contactUpdate.html'
+    template_name = 'Suivi/contactForm.html'
 class StandUpdate(UpdateView):
     model = AnimationStand
     fields = '__all__'
-    template_name = 'Suivi/standUpdate.html'
+    template_name = 'Suivi/standForm.html'
 class ActivityUpdate(UpdateView):
     model = AnimationActivity
     fields = '__all__'
-    template_name = 'Suivi/activityUpdate.html'
+    template_name = 'Suivi/activityForm.html'
 class PrestaUpdate(UpdateView):
     model = AnimationPrestation
     fields = '__all__'
-    template_name = 'Suivi/prestaUpdate.html'
+    template_name = 'Suivi/prestaForm.html'
 
 #Delete class view =>
 class ContactDelete(DeleteView):
