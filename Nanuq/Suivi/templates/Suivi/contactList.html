@@ -25,7 +25,7 @@
         <tr class = "lines">
             <td>{{contact.userInCharge.username}}</td>
             <td>{{contact.get_status_display}}</td> <!--get_variableName_display-->
-            <td>{{contact.namEntity}}</td>
+            <td><a href="{% url 'contactUpdate' contact.id %}">{{contact.namEntity}}</a></td>
             <td>{{contact.stand}}</td>
             <td>{{contact.activity}}</td>
             <td>{{contact.prestation}}</td>

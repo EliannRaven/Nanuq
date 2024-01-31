@@ -12,10 +12,10 @@ urlpatterns = [
     path('standCreate/', StandCreate.as_view(), name = 'standCreate'),
     path('activityCreate/', ActivityCreate.as_view(), name = 'activityCreate'),
     path('prestaCreate/', PrestaCreate.as_view(), name = 'prestaCreate'),
-    path('contactUpdate/', ContactUpdate.as_view(), name = 'contactUpdate'),
-    path('standUpdate/', StandUpdate.as_view(), name = 'standUpdate'),
-    path('activityUpdate/', ActivityUpdate.as_view(), name = 'activityUpdate'),
-    path('prestaUpdate/', PrestaUpdate.as_view(), name = 'prestaUpdate'),
+    path('contactUpdate/<int:pk>/', ContactUpdate.as_view(), name = 'contactUpdate'),
+    path('standUpdate/<int:pk>/', StandUpdate.as_view(), name = 'standUpdate'),
+    path('activityUpdate/<int:pk>/', ActivityUpdate.as_view(), name = 'activityUpdate'),
+    path('prestaUpdate/<int:pk>/', PrestaUpdate.as_view(), name = 'prestaUpdate'),
 ]
 
 #C:\Users\nicoh\Documents\Computer_science\Portfolio\Nanuq\Nanuq\Nanuq\static

@@ -21,13 +21,19 @@ class ContactCreate(CreateView):
     context_object_name = 'Contact'
     fields = '__all__'
     template_name = 'Suivi/contactForm.html'
-    success_url = reverse_lazy('contactList')
+
+    def get_success_url(self):
+        return reverse_lazy('contactUpdate', kwargs={'pk': self.object.pk})
+    
 class StandCreate(CreateView):
     model = AnimationStand
     context_object_name = 'Stand'
     fields = '__all__'
     template_name = 'Suivi/standForm.html'
-    #success_url = reverse_lazy('') => update view
+
+    def get_success_url(self):
+        return reverse_lazy('contactUpdate', kwargs={'pk': self.object.pk})
+    
 class ActivityCreate(CreateView):
     model = AnimationActivity
     context_object_name = 'Activity'
@@ -46,10 +52,30 @@ class ContactUpdate(UpdateView):
     model = AnimationContact
     fields = '__all__'
     template_name = 'Suivi/contactForm.html'
+    success_url = reverse_lazy('contactUpdate')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['has_stand'] = self.object.stand
+        context['animation_stand'] = AnimationStand.objects.filter(contact=self.object).first()
+        return context
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        return response
+    def get_success_url(self):
+        return reverse_lazy('contactUpdate', kwargs={'pk': self.object.pk})
+
+
+
 class StandUpdate(UpdateView):
     model = AnimationStand
     fields = '__all__'
     template_name = 'Suivi/standForm.html'
+    
+    def get_success_url(self):
+        return reverse_lazy('contactUpdate', kwargs={'pk': self.object.pk})
+
 class ActivityUpdate(UpdateView):
     model = AnimationActivity
     fields = '__all__'

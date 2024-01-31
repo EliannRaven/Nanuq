@@ -1,3 +1,23 @@
+{% extends 'intraBase.html' %}
+{% load static %}
+
+{% block header %}
+    <div class ="headerElement headerTitle">
+        Intranet Japan Impact:<br>
+        Suivi Pro
+    </div>
+{% endblock %}
+
+{% block content %}
+<a href="{% url 'contactList' %}"><img class = "goBack" src="{% static 'image/back.png' %}" alt="back"></a>
+{% if has_stand %}
+{% if animation_stand %}
+  <a href="{% url 'standUpdate' pk=animation_stand.pk %}">Update Animation Stand</a>
+{% else %}
+  <a href="{% url 'standCreate' %}">Create Animation Stand</a>
+{% endif %}
+{% endif %}
+
 <form method="POST" action="">
     {% csrf_token %}
 
@@ -5,3 +25,5 @@
 
     <input type="submit" value ="Submit">
 </form>
+
+{% endblock %}

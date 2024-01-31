@@ -94,3 +94,17 @@ body {
 .createContactButton a:hover {
     background-color: #ABEBC6 ;
 }
+
+/*Form*/
+.goBack {
+    margin-left: 5%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 45px;
+}
+.goBack:hover {
+    margin-left: 5%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 50px;
+}
