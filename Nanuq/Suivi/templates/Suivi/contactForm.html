@@ -21,7 +21,54 @@
 <form method="POST" action="">
     {% csrf_token %}
 
-    <p>{{form.as_p}}</p>
+    <div class="formTitle">Nom de l'entité: <br> {{form.namEntity}}</div>
+    <div class="inline-container">
+        <div class="inline-3box">Status: {{form.status}}</div>
+        <div class="inline-3box">Prénom: {{form.firstname}}</div>
+        <div class="inline-3box">Nom: {{form.surname}}</div>
+    </div>
+    <hr>
+    <div class="inline-container">
+        <div class="inline-3box">Stand: {{form.stand}}</div>
+        <div class="inline-3box">Activité: {{form.activity}}</div>
+        <div class="inline-3box">Prestation: {{form.prestation}}</div>
+    </div>
+    <hr>
+    <div class="inline-container">
+        <div class="inline-2box">Description:<br> {{form.description}}</div>
+        <div class="inline-2box">Notes:<br> {{form.note}}</div>
+    </div>
+    <hr>
+    <div class="inline-container">
+        <div class="inline-3box">E-mail: {{form.email}}</div>
+        <div class="inline-3box">Téléphone: {{form.phone}}</div>
+        <div class="inline-3box">Pays: {{form.addressCountry}}</div>
+    </div>
+    <div class="inline-container">
+        <div class="inline-3box">Adresse: Rue: {{form.addressRoad}}</div>
+        <div class="inline-3box">Adresse: n°: {{form.addressNumber}}</div>
+        <div class="inline-3box">Code postal + Ville: {{form.addressCity}}</div>
+    </div>
+    <hr>
+    <div class="inline-container">
+        <div class="inline-2box">Allergie:<br> {{form.allergy}}</div>
+        <div class="inline-2box">Parking:<br> {{form.parking}}</div>
+    </div>
+    <hr>
+    <div class="inline-container">
+        <div class="inline-2box">Transport: Commentaire:<br> {{form.transportComment}}</div>
+        <div class="inline-2box">Transport: Status<br> {{form.transportStatus}}</div>
+    </div>
+    <div class="inline-container">
+        <div class="inline-2box">Hôtel: Commentaire:<br> {{form.hotelComment}}</div>
+        <div class="inline-2box">Hôtel: Status<br> {{form.hotelStatus}}</div>
+    </div>
+    <hr>
+    <div class="inline-container">
+        <div class="inline-2box">Flux d'argent:<br> {{form.expense}}</div>
+    </div>
+
+
 
     <input type="submit" value ="Submit">
 </form>

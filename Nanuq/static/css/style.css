@@ -108,3 +108,74 @@ body {
     margin-bottom: 10px;
     width: 50px;
 }
+.formTitle {
+    margin: auto;
+    width: 50%;
+    font-weight: 600;
+    font-size: x-large;
+    padding: 10px;
+    text-align: center;
+}
+.formTitle input{
+    border-radius: 20px;
+    color: rgb(24, 10, 112);;
+    font-weight: 600;
+    font-size: x-large;
+    border: 1px solid rgb(44, 43, 43);
+    padding: 4px 10px;
+    text-align: center;
+}
+.inline-container{
+    font-weight: 600;
+    font-size: large;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.inline-3box{
+    width: 30%;
+}
+.inline-2box{
+    width: 45%;
+}
+.inline-3box input{
+    border-radius: 20px;
+    color: rgb(24, 10, 112);
+    font-weight: 600;
+    border: 1px solid rgb(44, 43, 43);
+    padding: 4px 10px;
+}
+.inline-3box select{
+    border-radius: 20px;
+    color: rgb(24, 10, 112);
+    font-weight: 600;
+    border: 1px solid rgb(44, 43, 43);
+    padding: 4px 10px;
+}
+.inline-2box textarea{
+    border-radius: 20px;
+    color: rgb(24, 10, 112);
+    font-weight: 600;
+    width: 95%;
+    border: 1px solid rgb(44, 43, 43);
+    padding: 4px 10px;
+}
+.inline-2box select{
+    border-radius: 20px;
+    color: rgb(24, 10, 112);
+    font-weight: 600;
+    width: 95%;
+    border: 1px solid rgb(44, 43, 43);
+    padding: 4px 10px;
+}
+.inline-2box input{
+    border-radius: 20px;
+    color: rgb(24, 10, 112);
+    font-weight: 600;
+    width: 95%;
+    border: 1px solid rgb(44, 43, 43);
+    padding: 4px 10px;
+}
